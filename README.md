@@ -1,6 +1,6 @@
 # Домашнее задание к занятию "`Ansible part 2`" - `Salihzyanov Ilyas`
 
-### Задание 1
+## Задание 1
 
 `Выполните действия, приложите файлы с плейбуками и вывод выполнения.`
 
@@ -12,12 +12,14 @@
 2. `Установить пакет tuned из стандартного репозитория вашей ОС. Запустить его, как демон — конфигурационный файл systemd появится автоматически при установке. Добавить tuned в автозагрузку.`
 3. `Изменить приветствие системы (motd) при входе на любое другое. Пожалуйста, в этом задании используйте переменную для задания приветствия. Переменную можно задавать любым удобным способом.`
 
+### Commands
+
 1. `mkdir ~/ansible/task_1`
 2. `cd ~/ansible/task_1`
 3. `touch playbook_1,yml | touch playbook_2.yml | touch playbook_3.yml | touch inventory.ini`
 4. `Open in Visual studio code > file > open folder > ~/ansible/task_1`
 
-## playbook_1
+### playbook_1
 ```
 ---
 - name: playbook_1
@@ -44,7 +46,7 @@
 ...
 ```
 
-# ansible-playbook -i inventory.ini playbook_1.yml
+### ansible-playbook -i inventory.ini playbook_1.yml
 
 PLAY [playbook_1] **************************************************************************************************************************************
 
@@ -63,7 +65,7 @@ ok: [localhost]
 PLAY RECAP *********************************************************************************************************************************************
 localhost                  : ok=4    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 
-## playbook_2
+### playbook_2
 ```
 ---
 - name: playbook_2
@@ -85,7 +87,7 @@ localhost                  : ok=4    changed=1    unreachable=0    failed=0    s
 ...
 ```
 
-# ansible-playbook -i inventory.ini playbook_2.yml  -K
+### ansible-playbook -i inventory.ini playbook_2.yml  -K
 
 PLAY [playbook_2] **************************************************************************************************************************************
 
@@ -101,7 +103,7 @@ changed: [localhost]
 PLAY RECAP *********************************************************************************************************************************************
 localhost                  : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 
-## playbook_3
+### playbook_3
 ```
 ---
 - name: playbook_3
@@ -120,7 +122,7 @@ localhost                  : ok=3    changed=1    unreachable=0    failed=0    s
 ...
 ```
 
-# ansible-playbook -i inventory.ini playbook_3.yml  -K
+### ansible-playbook -i inventory.ini playbook_3.yml  -K
 
 PLAY [playbook_3] **************************************************************************************************************************************
 
@@ -134,7 +136,7 @@ PLAY RECAP *********************************************************************
 localhost                  : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 
 
-# cat /etc/motd
+### cat /etc/motd
 
 Hey teacher, do you like my playbooks?)host@host:~/ansible/task_1$
 
@@ -146,7 +148,7 @@ Hey teacher, do you like my playbooks?)host@host:~/ansible/task_1$
 
 ---
 
-### Задание 2
+## Задание 2
 
 `Задание 2`
 `Выполните действия, приложите файлы с модифицированным плейбуком и вывод выполнения.`
@@ -158,7 +160,7 @@ Hey teacher, do you like my playbooks?)host@host:~/ansible/task_1$
 3. `ansible localhost -m setup | grep ansible_default_ipv4 -A 5`
 4. `change playbook_3 in visual studio code`
 
-## playbook_3
+### playbook_3
 ```
 ---
 - name: playbook_3
@@ -181,7 +183,7 @@ Hey teacher, do you like my playbooks?)host@host:~/ansible/task_1$
 ...
 ```
 
-# ansible-playbook -i inventory.ini playbook_3.yml  -K
+### ansible-playbook -i inventory.ini playbook_3.yml  -K
 
 PLAY [playbook_3] **************************************************************************************************************************************
 
@@ -194,15 +196,15 @@ changed: [localhost]
 PLAY RECAP *********************************************************************************************************************************************
 localhost                  : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 
-# cat /etc/motd
+### cat /etc/motd
 
 Hostname: host
 IP address: 10.0.2.15
 
 Have a nice day, administator)
 
-![screenshot-1](ansible localhost -m setup.png)
-![screenshot-2](changed playbook_3.png)
+![screenshot-1](setup.png)
+![screenshot-2](changed_playbook_3.png)
 ![screenshot-3](cat.png)
 
 ### Задание 3
