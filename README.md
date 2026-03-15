@@ -43,7 +43,6 @@
       remote_src: true
 ...
 
-
 # ansible-playbook -i inventory.ini playbook_1.yml
 
 PLAY [playbook_1] **************************************************************************************************************************************
@@ -117,6 +116,7 @@ localhost                  : ok=3    changed=1    unreachable=0    failed=0    s
       copy:
         content: "{{ motd_message }}"
         dest: /etc/motd
+...
 
 
 # ansible-playbook -i inventory.ini playbook_3.yml  -K
@@ -137,9 +137,9 @@ localhost                  : ok=2    changed=0    unreachable=0    failed=0    s
 
 Hey teacher, do you like my playbooks?)host@host:~/ansible/task_1$
 
-`![screenshot-1](playbook_1.png)`
-`![screenshot-2](playbook_2.png)`
-`![screenshot-3](playbook_3.png)`
+![screenshot-1](playbook_1.png)
+![screenshot-2](playbook_2.png)
+![screenshot-3](playbook_3.png)
 
 
 
