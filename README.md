@@ -234,7 +234,8 @@ Have a nice day, administator)
 4. `code ~ansidle/task_3/role_hw/handlers/main.yml`
 5. `code ~ansible/task_3/role_hw/tasks/main.yml`
 6. `code ~ansible/task_3/playbook_task_3.yml`
-7.
+7. `ansible-playbook -i inventory.ini playbook_task_3.yml -K`
+
 
 ### index.html.j2
 ```
@@ -317,6 +318,35 @@ Have a nice day, administator)
     - role_hw
 ...
 ```
+
+### ansible-playbook -i inventory.ini playbook_task_3.yml -K
+
+PLAY [deploy apache with host info] ********************************************************************************************************************
+
+TASK [Gathering Facts] *********************************************************************************************************************************
+ok: [localhost]
+
+TASK [role_hw : install apache] ************************************************************************************************************************
+ok: [localhost]
+
+TASK [role_hw : deploy index.html] *********************************************************************************************************************
+ok: [localhost]
+
+TASK [role_hw : ensure apache is runing and enable] ****************************************************************************************************
+ok: [localhost]
+
+TASK [role_hw : open port 80 if ufw exists] ************************************************************************************************************
+ok: [localhost]
+
+TASK [role_hw : check website is up] *******************************************************************************************************************
+ok: [localhost]
+
+PLAY RECAP *********************************************************************************************************************************************
+localhost                  : ok=6    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+### link to role
+
+https://drive.google.com/file/d/17PtBe1vCCXKbOBaBNkaxq1BTdauild_N/view?usp=sharing
 
 ![screenshot-1](task_3/run_pb_3.png)
 ![screenshot-2](task_3/curl_localhost.png)
