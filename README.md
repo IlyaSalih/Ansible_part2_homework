@@ -18,7 +18,7 @@
 4. `Open in Visual studio code > file > open folder > ~/ansible/task_1`
 
 ## playbook_1
-
+```
 ---
 - name: playbook_1
   hosts: all
@@ -42,6 +42,7 @@
       dest: /home/ansible/task_1/extract_kafka
       remote_src: true
 ...
+```
 
 # ansible-playbook -i inventory.ini playbook_1.yml
 
@@ -63,7 +64,7 @@ PLAY RECAP *********************************************************************
 localhost                  : ok=4    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 
 ## playbook_2
-
+```
 ---
 - name: playbook_2
   hosts: all
@@ -82,7 +83,7 @@ localhost                  : ok=4    changed=1    unreachable=0    failed=0    s
           state: started
           enabled: yes
 ...
-
+```
 
 # ansible-playbook -i inventory.ini playbook_2.yml  -K
 
@@ -101,7 +102,7 @@ PLAY RECAP *********************************************************************
 localhost                  : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 
 ## playbook_3
-
+```
 ---
 - name: playbook_3
   hosts: all
@@ -117,7 +118,7 @@ localhost                  : ok=3    changed=1    unreachable=0    failed=0    s
         content: "{{ motd_message }}"
         dest: /etc/motd
 ...
-
+```
 
 # ansible-playbook -i inventory.ini playbook_3.yml  -K
 
