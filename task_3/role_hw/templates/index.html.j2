@@ -1,0 +1,14 @@
+<html>
+  <head>
+    <title>Host info</title>
+  </head>
+  <body>
+    <h1>Welcome to {{ ansible_hostname }}</h1>
+    <ul>
+      <li>IP address: {{ ansible_default_ipv4.address }}</li>
+      <li>CPU cores: {{ ansible_processor_cores }}</li>
+      <li>RAM (MB): {{ ansible_memtotal_mb }}</li>
+      <li>Disk (GB) first device: {{ ansible_devices['sda'].size | default('unknown') }}</li>
+    </ul>
+  </body>
+</html>

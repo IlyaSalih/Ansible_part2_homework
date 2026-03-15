@@ -207,24 +207,117 @@ Have a nice day, administator)
 ![screenshot-2](changed_playbook_3.png)
 ![screenshot-3](cat.png)
 
-### Задание 3
+## Задание 3
 
-`Приведите ответ в свободной форме........`
+`Выполните действия, приложите архив с ролью и вывод выполнения.`
 
-1. `Заполните здесь этапы выполнения, если требуется ....`
-2. `Заполните здесь этапы выполнения, если требуется ....`
-3. `Заполните здесь этапы выполнения, если требуется ....`
-4. `Заполните здесь этапы выполнения, если требуется ....`
-5. `Заполните здесь этапы выполнения, если требуется ....`
-6.
+`Ознакомьтесь со статьёй «Ansible - это вам не bash», сделайте соответствующие выводы и не используйте модули shell или command при выполнении задания.`
 
+### `Создайте плейбук, который будет включать в себя одну, созданную вами роль. Роль должна:`
+
+1. `Установить веб-сервер Apache на управляемые хосты.`
+2. `Сконфигурировать файл index.html c выводом характеристик каждого компьютера как веб-страницу по умолчанию для Apache. Необходимо включить CPU, RAM, величину первого HDD, IP-адрес. Используйте Ansible facts и jinja2-template. Необходимо реализовать handler: перезапуск Apache только в случае изменения файла конфигурации Apache.`
+3. `Открыть порт 80, если необходимо, запустить сервер и добавить его в автозагрузку.`
+4. `Сделать проверку доступности веб-сайта (ответ 200, модуль uri).`
+
+### `В качестве решения:`
+
+1. `предоставьте плейбук, использующий роль;`
+2. `разместите архив созданной роли у себя на Google диске и приложите ссылку на роль в своём решении;`
+3. `предоставьте скриншоты выполнения плейбука;`
+4. `предоставьте скриншот браузера, отображающего сконфигурированный index.html в качестве сайта.`
+
+### Commands
+
+1. `ansible-galaxy init role_hw`
+3. `touch index.html.j2 | code index.html.j2`
+4. `code ~ansidle/task_3/role_hw/handlers/main.yml`
+5. `code ~ansible/task_3/role_hw/tasks/main.yml`
+6. `code ~ansible/task_3/playbook_task_3.yml`
+7.
+
+### index.html.j2
 ```
-Поле для вставки кода...
-....
-....
-....
-....
+<html>
+<head>
+    <title>Server Info</title>
+</head>
+<body>
+
+<h1>Server: {{ ansible_hostname }}</h1>
+
+<ul>
+<li>IP Address: {{ ansible_default_ipv4.address }}</li>
+<li>CPU cores: {{ ansible_processor_cores }}</li>
+<li>RAM total: {{ ansible_memtotal_mb }} MB</li>
+<li>First disk size: {{ ansible_devices['sda'].size }}</li>
+</ul>
+
+</body>
+</html>
 ```
 
-`При необходимости прикрепитe сюда скриншоты
-![Название скриншота](ссылка на скриншот)`
+### handlers/main.yml
+```
+---
+- name: restart apache
+  ansible.builtin.service:
+    name: apache2
+    state: restarted
+...
+```
+
+### tasks/main.yml
+```
+---
+- name: install apache
+  ansible.builtib.apt:
+    name: apache2
+    state: present
+    update_cache: yes
+
+- name: deploy index.html
+  ansible.built.in.template:
+    src: index.html.j2
+    dest: var/www/html/index.html
+    owner: www-data
+    group: www-data
+    mode: 0644
+  notifi: restart apache
+
+- name: ensure apache is runing and enable
+  ansible.buitin.servise:
+    name: apache2
+    state: started
+    enabled: yes
+
+- name: open port 80 if ufw exists
+  ansible.buitin.ufw:
+    rule: allow
+    port: 80
+    proto: tcp
+  ignore_errors: yes
+
+- name: check website is up
+  ansible.builtin.uri:
+    url: localhoct
+    return_content: no
+    status_code: 200
+...
+```
+
+### playbook_task_3.yml
+```
+---
+- name: deploy apache with host info
+  hosts: all
+  become: yes
+
+  roles:
+    - role_hw
+...
+```
+
+![screenshot-1](task_3/run_pb_3.png)
+![screenshot-2](task_3/curl_localhost.png)
+![screenshot-3](task_3/browser.png)
